@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🚗 Average Velocity & 1st Kinematic Equation - فيزياء 9 متقدم | Mr. Mohammed Hesham</title>
+<meta name="description" content="امتحان تفاعلي عن السرعة المتوسطة والمعادلة الحركية الأولى - فيزياء 9 متقدم">
+<meta name="author" content="Mr. Mohammed Hesham">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Cairo', sans-serif; background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); }
+body.en-mode { font-family: 'Inter', sans-serif; direction: ltr; }
+.arabic-math { font-family: 'Amiri', 'Cairo', serif; }
+.correct { background-color: #dcfce7 !important; border-color: #16a34a !important; }
+.incorrect { background-color: #fee2e2 !important; border-color: #dc2626 !important; }
+.timer-warning { color: #dc2626 !important; animation: pulse 1s infinite; }
+@keyframes pulse { 50% { opacity: 0.7; } }
+@media print { .no-print { display: none !important; } }
+.success-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.875rem; }
+.grade-excellent { background: #dcfce7; color: #166534; }
+.grade-good { background: #fef3c7; color: #92400e; }
+.grade-pass { background: #dbeafe; color: #1e40af; }
+.grade-fail { background: #fee2e2; color: #991b1b; }
+.lang-switch { position: fixed; top: 16px; left: 16px; z-index: 100; background: white; padding: 6px; border-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); display: flex; gap: 4px; border: 2px solid #2563eb; }
+body.en-mode .lang-switch { left: auto; right: 16px; }
+.lang-btn { padding: 6px 14px; border-radius: 20px; cursor: pointer; font-weight: bold; transition: all 0.3s; border: none; font-size: 0.875rem; background: transparent; color: #6b7280; }
+.lang-btn.active { background: #2563eb; color: white; box-shadow: 0 2px 6px rgba(37,99,235,0.4); }
+.shuffle-badge { display: inline-block; background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; margin-right: 8px; }
+body.en-mode .shuffle-badge { margin-right: 0; margin-left: 8px; }
+.math-display { display: inline-block; direction: ltr; font-family: 'Amiri', serif; font-size: 1.1em; padding: 2px 6px; background: #dbeafe; border-radius: 4px; margin: 2px; color: #1e40af; font-weight: 600; }
+.save-indicator { position: fixed; bottom: 20px; left: 20px; z-index: 200; background: #10b981; color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+body.en-mode .save-indicator { left: auto; right: 20px; }
+.save-indicator.show { opacity: 1; }
+.formula-box { background: #dbeafe; border: 2px solid #2563eb; border-radius: 8px; padding: 12px; margin: 10px 0; font-family: 'Amiri', serif; direction: ltr; text-align: center; }
+.svg-graph { display: block; margin: 12px auto; background: white; border: 2px solid #e5e7eb; border-radius: 12px; padding: 8px; max-width: 100%; }
+.graph-container { text-align: center; margin: 10px 0; }
+.module-badge { display: inline-block; padding: 4px 16px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; margin-bottom: 8px; }
+.module-1 { background: #dbeafe; color: #1e40af; }
+.module-2 { background: #fce7f3; color: #9f1239; }
+.module-3 { background: #ecfdf5; color: #065f46; }
+.module-4 { background: #fef3c7; color: #92400e; }
+.module-5 { background: #ede9fe; color: #5b21b6; }
+.module-6 { background: #fee2e2; color: #991b1b; }
+</style>
+</head>
+<body class="p-4 md:p-8 min-h-screen">
+
+<div class="lang-switch no-print">
+<button class="lang-btn active" onclick="setLanguage('ar')" id="btn-ar">عربي</button>
+<button class="lang-btn" onclick="setLanguage('en')" id="btn-en">EN</button>
+</div>
+
+<div id="saveIndicator" class="save-indicator">💾 <span data-ar="تم الحفظ" data-en="Saved">تم الحفظ</span></div>
+
+<div id="timer-container" class="max-w-5xl mx-auto mb-4 text-center no-print">
+<div class="bg-white p-4 rounded-2xl shadow-lg inline-block border-2 border-blue-100">
+<span class="text-gray-600 ml-2">⏰ <span data-ar="الوقت المتبقي:" data-en="Time Left:">الوقت المتبقي:</span></span>
+<span id="timer" class="text-2xl font-bold text-blue-700 font-mono">60:00</span>
+<span class="shuffle-badge">🚗 <span data-ar="السرعة المتوسطة" data-en="Average Velocity">السرعة المتوسطة</span> - 30 <span data-ar="سؤال" data-en="Questions">سؤال</span></span>
+</div>
+</div>
+
+<div class="max-w-5xl mx-auto mb-6 flex flex-wrap gap-3 justify-center no-print">
+<button onclick="toggleAnswers()" class="bg-blue-700 hover:bg-blue-800 text-white px-5 py-2 rounded-xl font-medium transition shadow">👀 <span data-ar="إظهار/إخفاء الإجابات" data-en="Show/Hide Answers">إظهار/إخفاء الإجابات</span></button>
+<button onclick="window.print()" class="bg-gray-700 hover:bg-gray-900 text-white px-5 py-2 rounded-xl font-medium transition shadow">🖨️ <span data-ar="طباعة" data-en="Print">طباعة</span></button>
+<button onclick="reshuffleExam()" class="bg-gradient-to-r from-blue-700 to-indigo-600 hover:from-blue-800 hover:to-indigo-700 text-white px-5 py-2 rounded-xl font-medium transition shadow">🔄 <span data-ar="أسئلة جديدة" data-en="New Questions">أسئلة جديدة</span></button>
+<button onclick="clearProgress()" class="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-xl font-medium transition shadow">🗑️ <span data-ar="مسح التقدم" data-en="Clear Progress">مسح التقدم</span></button>
+</div>
+
+<header class="max-w-5xl mx-auto bg-white p-8 rounded-3xl shadow-2xl mb-8 border-4 border-blue-500">
+<div class="text-center">
+<div class="inline-block bg-blue-700 text-white px-6 py-2 rounded-full text-sm font-bold mb-4">PHYSICS GRADE 9 ADVANCED</div>
+<h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">🚗 <span data-ar="السرعة المتوسطة والمعادلة الحركية الأولى" data-en="Average Velocity & The 1st Kinematic Equation">السرعة المتوسطة والمعادلة الحركية الأولى</span></h1>
+<h2 class="text-xl text-blue-700 font-semibold mb-2"><span data-ar="الفصل 2.4 - Section 2.4: How Fast?" data-en="Chapter 2.4 - Section 2.4: How Fast?">الفصل 2.4 - Section 2.4: How Fast?</span></h2>
+<p class="text-gray-600 mb-4"><span data-ar="Position, Displacement, Velocity & Position-Time Graphs" data-en="Position, Displacement, Velocity & Position-Time Graphs">الموقع، الإزاحة، السرعة ورسوم الموقع-الزمن</span></p>
+<p class="text-sm text-green-600 font-semibold">💾 <span data-ar="يتم حفظ تقدمك تلقائياً - 30 سؤالاً في 6 أقسام" data-en="Your progress is auto-saved - 30 questions in 6 sections">يتم حفظ تقدمك تلقائياً - 30 سؤالاً في 6 أقسام</span></p>
+</div>
+<div class="mt-6 flex flex-wrap justify-center gap-4 text-sm text-gray-600">
+<span>📅 <span data-ar="التاريخ:" data-en="Date:">التاريخ:</span> <input type="text" id="examDate" class="border-b-2 border-blue-300 bg-transparent w-32 text-center"></span>
+<span>😊 <span data-ar="الاسم:" data-en="Name:">الاسم:</span> <input type="text" id="studentName" class="border-b-2 border-blue-300 bg-transparent w-40 text-center" data-placeholder-ar="اكتب اسمك" data-placeholder-en="Your name" placeholder="اكتب اسمك"></span>
+<span>🏫 <span data-ar="الشعبة:" data-en="Class:">الشعبة:</span> <input type="text" id="studentClass" class="border-b-2 border-blue-300 bg-transparent w-32 text-center" data-placeholder-ar="الشعبة" data-placeholder-en="Class" placeholder="الشعبة"></span>
+<span>⏰ <span data-ar="المدة: 60 دقيقة" data-en="Duration: 60 min">المدة: 60 دقيقة</span></span>
+<span>📊 <span data-ar="المجموع: 100 درجة" data-en="Total: 100 points">المجموع: 100 درجة</span></span>
+</div>
+</header>
+
+<div class="max-w-5xl mx-auto mb-6 bg-white p-4 rounded-xl shadow-lg border-2 border-blue-200 no-print">
+<h3 class="font-bold text-lg mb-3 text-blue-800 text-center">📐 <span data-ar="القوانين الأساسية" data-en="Key Formulas">القوانين الأساسية</span></h3>
+<div class="grid md:grid-cols-3 gap-3 text-sm">
+<div class="formula-box">
+<strong><span data-ar="السرعة المتوسطة:" data-en="Average Velocity:">السرعة المتوسطة:</span></strong><br>
+<span class="math-display">v_avg = Δx/Δt = (x_f - x_i)/(t_f - t_i)</span>
+</div>
+<div class="formula-box">
+<strong><span data-ar="الموقع النهائي:" data-en="Final Position:">الموقع النهائي:</span></strong><br>
+<span class="math-display">x_f = x_i + v·Δt</span><br>
+<span data-ar="عند سرعة ثابتة" data-en="At constant velocity">عند سرعة ثابتة</span>
+</div>
+<div class="formula-box">
+<strong><span data-ar="الإزاحة:" data-en="Displacement:">الإزاحة:</span></strong><br>
+<span class="math-display">Δx = x_f - x_i</span><br>
+<span data-ar="كمية متجهة (لها اتجاه)" data-en="Vector quantity (has direction)">كمية متجهة (لها اتجاه)</span>
+</div>
+<div class="formula-box">
+<strong><span data-ar="ميل الرسم البياني:" data-en="Graph Slope:">ميل الرسم البياني:</span></strong><br>
+<span class="math-display">slope = Δx/Δt = velocity</span><br>
+<span data-ar="الميل = السرعة" data-en="Slope = velocity">الميل = السرعة</span>
+</div>
+<div class="formula-box">
+<strong><span data-ar="الاتجاهات:" data-en="Directions:">الاتجاهات:</span></strong><br>
+<span data-ar="شرق/يمين = موجب (+)" data-en="East/Right = positive (+)">شرق/يمين = موجب (+)</span><br>
+<span data-ar="غرب/يسار = سالب (-)" data-en="West/Left = negative (-)">غرب/يسار = سالب (-)</span>
+</div>
+<div class="formula-box">
+<strong><span data-ar="تحويل الوحدات:" data-en="Unit Conversion:">تحويل الوحدات:</span></strong><br>
+<span class="math-display">1 h = 60 min = 3600 s</span><br>
+<span class="math-display">1 km = 1000 m</span>
+</div>
+</div>
+</div>
+
+<main class="max-w-5xl mx-auto space-y-8" id="exam-content"></main>
+
+<div class="text-center no-print pb-8 mt-8">
+<button onclick="gradeExam()" class="bg-gradient-to-r from-blue-700 to-indigo-600 hover:from-blue-800 hover:to-indigo-700 text-white text-lg px-12 py-4 rounded-2xl font-bold shadow-xl transition transform hover:scale-105">🎯 <span data-ar="صحح إجاباتي!" data-en="Grade My Exam!">صحح إجاباتي!</span></button>
+</div>
+
+<div id="results-panel" class="max-w-5xl mx-auto mt-8 bg-white p-8 rounded-3xl shadow-2xl border-4 border-blue-500 hidden no-print">
+<h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">🏆 <span data-ar="نتيجتك يا بطل!" data-en="Your Result, Champion!">نتيجتك يا بطل!</span> 🏆</h2>
+<div class="grid md:grid-cols-3 gap-4 mb-6">
+<div class="bg-blue-50 p-4 rounded-xl text-center"><p>😊 <span data-ar="الاسم" data-en="Name">الاسم</span></p><p id="res-name" class="font-bold text-xl text-blue-700">-</p></div>
+<div class="bg-indigo-50 p-4 rounded-xl text-center"><p>📅 <span data-ar="التاريخ" data-en="Date">التاريخ</span></p><p id="res-date" class="font-bold text-xl text-indigo-700">-</p></div>
+<div class="bg-blue-50 p-4 rounded-xl text-center"><p>🌟 <span data-ar="المجموع" data-en="Total">المجموع</span></p><p id="res-total" class="font-bold text-3xl text-blue-700">0 / 100</p></div>
+</div>
+<div class="text-center mb-6">
+<span id="success-badge" class="success-badge grade-excellent">-</span>
+<p id="success-percent" class="text-4xl font-bold text-blue-700 mt-2">0%</p>
+<p class="text-sm text-gray-500"><span data-ar="نسبة النجاح" data-en="Success Rate">نسبة النجاح</span></p>
+</div>
+<div class="bg-gray-50 p-6 rounded-xl mb-6">
+<h3 class="font-bold text-lg mb-4 text-gray-800">📊 <span data-ar="أداؤك في كل قسم:" data-en="Your Performance by Section:">أداؤك في كل قسم:</span></h3>
+<div class="space-y-3" id="sections-performance"></div>
+</div>
+<div class="text-center">
+<button id="sendEmailBtn" onclick="sendResultsToEmail()" class="bg-gradient-to-r from-blue-700 to-indigo-600 text-white text-lg px-8 py-3 rounded-2xl font-bold shadow-xl transition">📧 <span data-ar="أرسل النتيجة للمعلم" data-en="Send Result to Teacher">أرسل النتيجة للمعلم</span></button>
+<p id="emailStatus" class="text-sm mt-2 text-center font-medium"></p>
+</div>
+</div>
+
+<footer class="max-w-5xl mx-auto mt-10 mb-8 text-center text-gray-500 text-sm no-print">
+© Average Velocity & Kinematics - Grade 9 Advanced Physics | Mr. Mohammed Hesham 🚗
+</footer>
+
+<script>
+const PUBLIC_KEY = "Rb3Lq8tXaFmc5YHUH";
+const SERVICE_ID = "service_w15m64i";
+const TEMPLATE_ID = "template_5b0u2tq";
+const TARGET_EMAIL = "mohammedhesham872@gmail.com";
+emailjs.init(PUBLIC_KEY);
+
+const STORAGE_KEY = 'avg_velocity_grade9_v1';
+const TOTAL_TIME = 3600;
+const TOTAL_QUESTIONS = 30;
+const TOTAL_SECTIONS = 6;
+const QUESTIONS_PER_SECTION = 5;
+
+let currentSeed = null;
+let answersVisible = false;
+let saveIndicatorTimeout = null;
+let currentLang = 'ar';
+let timeRemaining = TOTAL_TIME;
+let timerInterval;
+let examData;
+let correctAnswersMap = {};
+let rng = null;
+
+function mulberry32(a) {
+    return function() {
+        var t = a += 0x6D2B79F5;
+        t = Math.imul(t ^ t >>> 15, t | 1);
+        t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    }
+}
+
+function showSaveIndicator() {
+    const indicator = document.getElementById('saveIndicator');
+    indicator.classList.add('show');
+    if (saveIndicatorTimeout) clearTimeout(saveIndicatorTimeout);
+    saveIndicatorTimeout = setTimeout(() => indicator.classList.remove('show'), 1500);
+}
+
+function saveState(showIndicator = true) {
+    try {
+        const state = {
+            seed: currentSeed, lang: currentLang,
+            studentName: document.getElementById('studentName').value,
+            studentClass: document.getElementById('studentClass').value,
+            examDate: document.getElementById('examDate').value,
+            answers: getSelectedAnswers(),
+            timeRemaining: timeRemaining,
+            answersVisible: answersVisible, savedAt: Date.now()
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        if (showIndicator) showSaveIndicator();
+    } catch (e) { console.error('Save error:', e); }
+}
+
+function loadState() {
+    try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        return saved ? JSON.parse(saved) : null;
+    } catch (e) { return null; }
+}
+
+function getSelectedAnswers() {
+    const answers = {};
+    for (let i = 0; i < TOTAL_QUESTIONS; i++) {
+        const selected = document.querySelector('input[name="q'+i+'"]:checked');
+        if (selected) answers[i] = selected.value;
+    }
+    return answers;
+}
+
+function restoreAnswers(answers) {
+    if (!answers) return;
+    for (const [idx, val] of Object.entries(answers)) {
+        const radio = document.querySelector('input[name="q'+idx+'"][value="'+val+'"]');
+        if (radio) radio.checked = true;
+    }
+}
+
+function clearProgress() {
+    const msg = currentLang === 'ar' ? '⚠️ هل أنت متأكد من مسح كل التقدم؟' : '⚠️ Clear all progress?';
+    if (confirm(msg)) { localStorage.removeItem(STORAGE_KEY); location.reload(); }
+}
+
+function setupAnswerListeners() {
+    document.getElementById('exam-content').addEventListener('change', (e) => {
+        if (e.target.type === 'radio') saveState();
+    });
+}
+
+function setupInputListeners() {
+    ['studentName', 'studentClass', 'examDate'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener('input', () => saveState(false));
+            el.addEventListener('blur', () => saveState());
+        }
+    });
+}
+
+// ==================== SVG DIAGRAMS ====================
+const svgGraphs = {
+    two_cars_problem: `<svg class="svg-graph" width="500" height="320" viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="310" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#1e40af" font-weight="bold">🚗🚙 سيارتان تسيران في اتجاهين متعاكسين</text>
+        <!-- Road -->
+        <rect x="50" y="180" width="400" height="20" fill="#6b7280" stroke="#374151" stroke-width="2"/>
+        <!-- Points -->
+        <line x1="100" y1="200" x2="100" y2="230" stroke="#374151" stroke-width="2"/>
+        <text x="100" y="245" text-anchor="middle" font-size="11" fill="#374151" font-weight="bold">D</text>
+        <line x1="200" y1="200" x2="200" y2="230" stroke="#374151" stroke-width="2"/>
+        <text x="200" y="245" text-anchor="middle" font-size="11" fill="#374151" font-weight="bold">A (Origin)</text>
+        <line x1="280" y1="200" x2="280" y2="230" stroke="#374151" stroke-width="2"/>
+        <text x="280" y="245" text-anchor="middle" font-size="11" fill="#374151" font-weight="bold">B</text>
+        <line x1="420" y1="200" x2="420" y2="230" stroke="#374151" stroke-width="2"/>
+        <text x="420" y="245" text-anchor="middle" font-size="11" fill="#374151" font-weight="bold">C</text>
+        <!-- Blue car (going west/left) -->
+        <rect x="130" y="150" width="50" height="25" rx="5" fill="#3b82f6" stroke="#1e40af" stroke-width="2"/>
+        <circle cx="145" cy="178" r="6" fill="#1e3a8a"/>
+        <circle cx="165" cy="178" r="6" fill="#1e3a8a"/>
+        <text x="155" y="145" text-anchor="middle" font-size="10" fill="#1e40af" font-weight="bold">Blue Car</text>
+        <path d="M 155 130 L 130 130 M 130 130 L 140 125 M 130 130 L 140 135" stroke="#dc2626" stroke-width="2" fill="none"/>
+        <!-- Orange car (going east/right) -->
+        <rect x="320" y="150" width="50" height="25" rx="5" fill="#f97316" stroke="#ea580c" stroke-width="2"/>
+        <circle cx="335" cy="178" r="6" fill="#9a3412"/>
+        <circle cx="355" cy="178" r="6" fill="#9a3412"/>
+        <text x="345" y="145" text-anchor="middle" font-size="10" fill="#ea580c" font-weight="bold">Orange Car</text>
+        <path d="M 345 130 L 370 130 M 370 130 L 360 125 M 370 130 L 360 135" stroke="#dc2626" stroke-width="2" fill="none"/>
+        <!-- Distance markers -->
+        <line x1="200" y1="260" x2="280" y2="260" stroke="#16a34a" stroke-width="2" marker-start="url(#dotG)" marker-end="url(#dotG)"/>
+        <text x="240" y="278" text-anchor="middle" font-size="10" fill="#166534" font-weight="bold">x_i = 6.0 km east</text>
+        <!-- Direction arrow -->
+        <line x1="50" y1="295" x2="450" y2="295" stroke="#16a34a" stroke-width="2" marker-end="url(#arrowG)"/>
+        <text x="250" y="310" text-anchor="middle" font-size="10" fill="#166534" font-weight="bold">East (موجب +) ← → West (سالب -)</text>
+        <defs>
+            <marker id="arrowG" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#16a34a"/></marker>
+            <marker id="dotG" markerWidth="6" markerHeight="6" refX="3" refY="3"><circle cx="3" cy="3" r="2" fill="#16a34a"/></marker>
+        </defs>
+    </svg>`,
+    
+    ship_path: `<svg class="svg-graph" width="500" height="280" viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="270" rx="12" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#9f1239" font-weight="bold">🚢 مسار السفينة - Ship Path (Figure 24)</text>
+        <!-- Path line -->
+        <line x1="80" y1="150" x2="420" y2="150" stroke="#374151" stroke-width="2"/>
+        <!-- Points -->
+        <circle cx="120" cy="150" r="5" fill="#374151"/>
+        <text x="120" y="175" text-anchor="middle" font-size="11" fill="#374151" font-weight="bold">D</text>
+        <circle cx="180" cy="150" r="5" fill="#374151"/>
+        <text x="180" y="175" text-anchor="middle" font-size="11" fill="#374151" font-weight="bold">A</text>
+        <text x="180" y="190" text-anchor="middle" font-size="9" fill="#374151">(Origin)</text>
+        <circle cx="240" cy="150" r="5" fill="#374151"/>
+        <text x="240" y="175" text-anchor="middle" font-size="11" fill="#374151" font-weight="bold">B</text>
+        <circle cx="400" cy="150" r="5" fill="#374151"/>
+        <text x="400" y="175" text-anchor="middle" font-size="11" fill="#374151" font-weight="bold">C</text>
+        <text x="430" y="155" font-size="11" fill="#374151" font-weight="bold">East</text>
+        <!-- Distance marker -->
+        <line x1="180" y1="120" x2="240" y2="120" stroke="#16a34a" stroke-width="2" marker-start="url(#dotS)" marker-end="url(#dotS)"/>
+        <text x="210" y="110" text-anchor="middle" font-size="10" fill="#166534" font-weight="bold">x_i = 25 km</text>
+        <!-- Direction arrows -->
+        <line x1="200" y1="210" x2="380" y2="210" stroke="#16a34a" stroke-width="2" marker-end="url(#arrowS)"/>
+        <text x="290" y="230" text-anchor="middle" font-size="10" fill="#166534">East (موجب)</text>
+        <line x1="200" y1="245" x2="130" y2="245" stroke="#dc2626" stroke-width="2" marker-end="url(#arrowS2)"/>
+        <text x="165" y="265" text-anchor="middle" font-size="10" fill="#991b1b">West (سالب)</text>
+        <defs>
+            <marker id="arrowS" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#16a34a"/></marker>
+            <marker id="arrowS2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#dc2626"/></marker>
+            <marker id="dotS" markerWidth="6" markerHeight="6" refX="3" refY="3"><circle cx="3" cy="3" r="2" fill="#16a34a"/></marker>
+        </defs>
+    </svg>`,
+    
+    motorcycle_problem: `<svg class="svg-graph" width="500" height="320" viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="310" rx="12" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#065f46" font-weight="bold">🏍️ السائق والدراجة النارية - Motorcyclist (Example 4)</text>
+        <!-- Road -->
+        <path d="M 50 200 L 450 200 L 470 230 L 30 230 Z" fill="#9ca3af" stroke="#6b7280" stroke-width="2"/>
+        <!-- Road markings -->
+        <line x1="100" y1="215" x2="150" y2="215" stroke="white" stroke-width="2" stroke-dasharray="8"/>
+        <line x1="200" y1="215" x2="250" y2="215" stroke="white" stroke-width="2" stroke-dasharray="8"/>
+        <line x1="300" y1="215" x2="350" y2="215" stroke="white" stroke-width="2" stroke-dasharray="8"/>
+        <line x1="400" y1="215" x2="440" y2="215" stroke="white" stroke-width="2" stroke-dasharray="8"/>
+        <!-- Points A, B, C -->
+        <line x1="100" y1="230" x2="100" y2="260" stroke="#374151" stroke-width="2"/>
+        <text x="100" y="275" text-anchor="middle" font-size="12" fill="#374151" font-weight="bold">A</text>
+        <line x1="250" y1="230" x2="250" y2="260" stroke="#374151" stroke-width="2"/>
+        <text x="250" y="275" text-anchor="middle" font-size="12" fill="#374151" font-weight="bold">B</text>
+        <line x1="400" y1="230" x2="400" y2="260" stroke="#374151" stroke-width="2"/>
+        <text x="400" y="275" text-anchor="middle" font-size="12" fill="#374151" font-weight="bold">C</text>
+        <!-- Motorcycle -->
+        <circle cx="280" cy="180" r="15" fill="#374151"/>
+        <rect x="260" y="185" width="40" height="20" rx="5" fill="#dc2626"/>
+        <circle cx="265" cy="205" r="8" fill="#1e3a8a"/>
+        <circle cx="295" cy="205" r="8" fill="#1e3a8a"/>
+        <!-- Rider -->
+        <circle cx="280" cy="165" r="8" fill="#fbbf24"/>
+        <rect x="275" y="173" width="10" height="15" fill="#3b82f6"/>
+        <!-- Distance arrows -->
+        <line x1="100" y1="290" x2="250" y2="290" stroke="#16a34a" stroke-width="2" marker-start="url(#dotM)" marker-end="url(#dotM)"/>
+        <text x="175" y="308" text-anchor="middle" font-size="10" fill="#166534" font-weight="bold">x_i = 46 m east</text>
+        <line x1="100" y1="315" x2="400" y2="315" stroke="#2563eb" stroke-width="2" marker-start="url(#dotM)" marker-end="url(#dotM2)"/>
+        <text x="250" y="330" text-anchor="middle" font-size="10" fill="#1e40af" font-weight="bold">x = ? (position of C)</text>
+        <defs>
+            <marker id="dotM" markerWidth="6" markerHeight="6" refX="3" refY="3"><circle cx="3" cy="3" r="2" fill="#16a34a"/></marker>
+            <marker id="dotM2" markerWidth="6" markerHeight="6" refX="3" refY="3"><circle cx="3" cy="3" r="2" fill="#2563eb"/></marker>
+        </defs>
+    </svg>`,
+    
+    position_time_graph: `<svg class="svg-graph" width="500" height="400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="390" rx="12" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#5b21b6" font-weight="bold">📊 رسم الموقع-الزمن - Position-Time Graph</text>
+        <!-- Grid -->
+        <g stroke="#e5e7eb" stroke-width="0.5">
+            ${Array.from({length: 13}, (_, i) => `<line x1="${60 + i*35}" y1="50" x2="${60 + i*35}" y2="350"/>`).join('')}
+            ${Array.from({length: 9}, (_, i) => `<line x1="60" y1="${50 + i*37.5}" x2="460" y2="${50 + i*37.5}"/>`).join('')}
+        </g>
+        <!-- Axes -->
+        <line x1="60" y1="200" x2="470" y2="200" stroke="#374151" stroke-width="2" marker-end="url(#arrowPT)"/>
+        <line x1="60" y1="350" x2="60" y2="40" stroke="#374151" stroke-width="2" marker-end="url(#arrowPT)"/>
+        <text x="475" y="205" font-size="11" fill="#374151" font-weight="bold">time (s)</text>
+        <text x="45" y="35" font-size="11" fill="#374151" font-weight="bold">position (m)</text>
+        <text x="65" y="215" font-size="10" fill="#374151">0</text>
+        <!-- Scale marks -->
+        <text x="95" y="215" font-size="9" fill="#6b7280">10</text>
+        <text x="130" y="215" font-size="9" fill="#6b7280">20</text>
+        <text x="165" y="215" font-size="9" fill="#6b7280">30</text>
+        <text x="200" y="215" font-size="9" fill="#6b7280">40</text>
+        <text x="235" y="215" font-size="9" fill="#6b7280">50</text>
+        <text x="270" y="215" font-size="9" fill="#6b7280">60</text>
+        <text x="305" y="215" font-size="9" fill="#6b7280">70</text>
+        <text x="340" y="215" font-size="9" fill="#6b7280">80</text>
+        <text x="375" y="215" font-size="9" fill="#6b7280">90</text>
+        <text x="410" y="215" font-size="9" fill="#6b7280">100</text>
+        <text x="445" y="215" font-size="9" fill="#6b7280">110</text>
+        <text x="55" y="165" font-size="9" fill="#6b7280">20</text>
+        <text x="55" y="125" font-size="9" fill="#6b7280">40</text>
+        <text x="55" y="87" font-size="9" fill="#6b7280">60</text>
+        <text x="55" y="50" font-size="9" fill="#6b7280">80</text>
+        <text x="55" y="240" font-size="9" fill="#6b7280">-20</text>
+        <text x="55" y="278" font-size="9" fill="#6b7280">-40</text>
+        <!-- Graph line (from image) -->
+        <!-- (0,0) to (10,60) to (15,60) to (40,-40) to (55,0) -->
+        <path d="M 60 200 L 130 80 L 165 80 L 340 290 L 445 200" fill="none" stroke="#7c3aed" stroke-width="3"/>
+        <!-- Key points -->
+        <circle cx="60" cy="200" r="4" fill="#dc2626"/>
+        <circle cx="130" cy="80" r="4" fill="#dc2626"/>
+        <circle cx="165" cy="80" r="4" fill="#dc2626"/>
+        <circle cx="340" cy="290" r="4" fill="#dc2626"/>
+        <circle cx="445" cy="200" r="4" fill="#dc2626"/>
+        <!-- Highlighted regions -->
+        <rect x="340" y="200" width="105" height="90" fill="#fbbf24" opacity="0.2" stroke="#f59e0b" stroke-width="1"/>
+        <text x="392" y="250" text-anchor="middle" font-size="9" fill="#92400e" font-weight="bold">40-55s</text>
+        <rect x="130" y="80" width="315" height="210" fill="#3b82f6" opacity="0.1" stroke="#2563eb" stroke-width="1"/>
+        <text x="287" y="190" text-anchor="middle" font-size="9" fill="#1e40af" font-weight="bold">10-55s region</text>
+        <!-- Slope annotations -->
+        <text x="100" y="140" font-size="9" fill="#16a34a" font-weight="bold">slope = +6 m/s</text>
+        <text x="250" y="190" font-size="9" fill="#dc2626" font-weight="bold">slope = -4 m/s</text>
+        <text x="390" y="240" font-size="9" fill="#16a34a" font-weight="bold">slope = +2.67 m/s</text>
+        <text x="147" y="70" font-size="9" fill="#7c3aed" font-weight="bold">slope = 0 (at rest)</text>
+        <defs><marker id="arrowPT" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#374151"/></marker></defs>
+    </svg>`,
+    
+    dog_running: `<svg class="svg-graph" width="500" height="280" viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="270" rx="12" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#92400e" font-weight="bold">🐕 الكلب يجري - Dog Running Problem</text>
+        <!-- Path -->
+        <line x1="50" y1="180" x2="450" y2="180" stroke="#92400e" stroke-width="3"/>
+        <!-- Start point -->
+        <circle cx="100" cy="180" r="8" fill="#16a34a"/>
+        <text x="100" y="210" text-anchor="middle" font-size="11" fill="#166534" font-weight="bold">Start (x_i = 0)</text>
+        <!-- End point -->
+        <circle cx="400" cy="180" r="8" fill="#dc2626"/>
+        <text x="400" y="210" text-anchor="middle" font-size="11" fill="#991b1b" font-weight="bold">End (x_f = ?)</text>
+        <!-- Dog -->
+        <text x="250" y="160" text-anchor="middle" font-size="30">🐕</text>
+        <!-- Arrow showing direction -->
+        <line x1="120" y1="140" x2="380" y2="140" stroke="#2563eb" stroke-width="3" marker-end="url(#arrowD)"/>
+        <text x="250" y="130" text-anchor="middle" font-size="12" fill="#1e40af" font-weight="bold">v = 4.00 m/s (east/موجب)</text>
+        <!-- Time info -->
+        <rect x="150" y="225" width="200" height="35" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="248" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">t = 2.00 min = 120 s</text>
+        <defs><marker id="arrowD" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/></marker></defs>
+    </svg>`,
+    
+    velocity_formula: `<svg class="svg-graph" width="500" height="360" viewBox="0 0 500 360" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="350" rx="12" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#9f1239" font-weight="bold">📐 المعادلة الحركية الأولى</text>
+        <!-- Main formula -->
+        <rect x="20" y="45" width="460" height="60" rx="6" fill="#fbcfe8" stroke="#ec4899" stroke-width="2"/>
+        <text x="250" y="70" text-anchor="middle" font-size="14" fill="#9f1239" font-family="'Amiri', serif" font-weight="bold">x_f = x_i + v_avg · Δt</text>
+        <text x="250" y="92" text-anchor="middle" font-size="11" fill="#9f1239">Final Position = Initial Position + (Velocity × Time)</text>
+        <!-- Variables -->
+        <rect x="20" y="115" width="220" height="100" rx="6" fill="#fbcfe8" stroke="#ec4899" stroke-width="2"/>
+        <text x="130" y="135" text-anchor="middle" font-size="11" fill="#9f1239" font-weight="bold">Variables (المتغيرات):</text>
+        <text x="130" y="155" text-anchor="middle" font-size="10" fill="#9f1239">x_f = final position (موقع نهائي)</text>
+        <text x="130" y="173" text-anchor="middle" font-size="10" fill="#9f1239">x_i = initial position (موقع ابتدائي)</text>
+        <text x="130" y="191" text-anchor="middle" font-size="10" fill="#9f1239">v_avg = average velocity</text>
+        <text x="130" y="209" text-anchor="middle" font-size="10" fill="#9f1239">Δt = time interval (فترة زمنية)</text>
+        <rect x="260" y="115" width="220" height="100" rx="6" fill="#fbcfe8" stroke="#ec4899" stroke-width="2"/>
+        <text x="370" y="135" text-anchor="middle" font-size="11" fill="#9f1239" font-weight="bold">Units (الوحدات):</text>
+        <text x="370" y="155" text-anchor="middle" font-size="10" fill="#9f1239">Position: meters (m) or km</text>
+        <text x="370" y="173" text-anchor="middle" font-size="10" fill="#9f1239">Velocity: m/s or km/h</text>
+        <text x="370" y="191" text-anchor="middle" font-size="10" fill="#9f1239">Time: seconds (s) or hours (h)</text>
+        <text x="370" y="209" text-anchor="middle" font-size="10" fill="#9f1239">⚠️ Must be consistent!</text>
+        <!-- Example -->
+        <rect x="20" y="225" width="460" height="115" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="245" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">Example (مثال): Motorcyclist at B</text>
+        <text x="250" y="263" text-anchor="middle" font-size="10" fill="#92400e">x_i = 46 m (at point B), v = 12 m/s east, t = 3.0 s</text>
+        <text x="250" y="281" text-anchor="middle" font-size="10" fill="#92400e" font-family="'Amiri', serif">x_f = 46 + (12)(3.0) = 46 + 36 = 82 m east</text>
+        <text x="250" y="300" text-anchor="middle" font-size="10" fill="#92400e">Position of point C = 82 m east of origin A</text>
+        <text x="250" y="320" text-anchor="middle" font-size="10" fill="#92400e" font-weight="bold">Displacement Δx = x_f - x_i = 82 - 46 = 36 m east</text>
+        <text x="250" y="337" text-anchor="middle" font-size="9" fill="#92400e">Distance traveled = |Δx| = 36 m (same as displacement here)</text>
+    </svg>`,
+    
+    slope_interpretation: `<svg class="svg-graph" width="500" height="380" viewBox="0 0 500 380" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="370" rx="12" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#991b1b" font-weight="bold">📊 تفسير الميل في رسم الموقع-الزمن</text>
+        <!-- Three scenarios -->
+        <!-- Positive slope -->
+        <rect x="20" y="45" width="145" height="130" rx="6" fill="#fecaca" stroke="#dc2626" stroke-width="2"/>
+        <text x="92" y="65" text-anchor="middle" font-size="10" fill="#991b1b" font-weight="bold">Positive Slope</text>
+        <text x="92" y="80" text-anchor="middle" font-size="9" fill="#991b1b">ميل موجب</text>
+        <line x1="40" y1="160" x2="145" y2="80" stroke="#16a34a" stroke-width="3"/>
+        <text x="92" y="170" text-anchor="middle" font-size="9" fill="#166534">Moving East (+)</text>
+        <text x="92" y="185" text-anchor="middle" font-size="9" fill="#166534">يتحرك شرقاً</text>
+        <!-- Zero slope -->
+        <rect x="175" y="45" width="145" height="130" rx="6" fill="#fecaca" stroke="#dc2626" stroke-width="2"/>
+        <text x="247" y="65" text-anchor="middle" font-size="10" fill="#991b1b" font-weight="bold">Zero Slope</text>
+        <text x="247" y="80" text-anchor="middle" font-size="9" fill="#991b1b">ميل صفر</text>
+        <line x1="195" y1="120" x2="300" y2="120" stroke="#f59e0b" stroke-width="3"/>
+        <text x="247" y="170" text-anchor="middle" font-size="9" fill="#92400e">At Rest (ساكن)</text>
+        <text x="247" y="185" text-anchor="middle" font-size="9" fill="#92400e">لا يتحرك</text>
+        <!-- Negative slope -->
+        <rect x="330" y="45" width="145" height="130" rx="6" fill="#fecaca" stroke="#dc2626" stroke-width="2"/>
+        <text x="402" y="65" text-anchor="middle" font-size="10" fill="#991b1b" font-weight="bold">Negative Slope</text>
+        <text x="402" y="80" text-anchor="middle" font-size="9" fill="#991b1b">ميل سالب</text>
+        <line x1="350" y1="80" x2="455" y2="160" stroke="#dc2626" stroke-width="3"/>
+        <text x="402" y="170" text-anchor="middle" font-size="9" fill="#991b1b">Moving West (-)</text>
+        <text x="402" y="185" text-anchor="middle" font-size="9" fill="#991b1b">يتحرك غرباً</text>
+        <!-- Slope formula -->
+        <rect x="20" y="190" width="460" height="70" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="210" text-anchor="middle" font-size="12" fill="#92400e" font-weight="bold">Slope = Rise/Run = Δx/Δt = Velocity</text>
+        <text x="250" y="230" text-anchor="middle" font-size="11" fill="#92400e" font-family="'Amiri', serif">الميل = التغير في الموقع / التغير في الزمن = السرعة</text>
+        <text x="250" y="250" text-anchor="middle" font-size="10" fill="#92400e">Steeper slope = faster speed | ميل أشد = سرعة أكبر</text>
+        <!-- Example calculation -->
+        <rect x="20" y="270" width="460" height="90" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="290" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">Example: From graph (40s to 55s)</text>
+        <text x="250" y="308" text-anchor="middle" font-size="10" fill="#92400e">At t=40s: x = -40 m | At t=55s: x = 0 m</text>
+        <text x="250" y="326" text-anchor="middle" font-size="10" fill="#92400e" font-family="'Amiri', serif">v_avg = (0 - (-40))/(55 - 40) = 40/15 = 2.67 m/s</text>
+        <text x="250" y="344" text-anchor="middle" font-size="10" fill="#92400e">Positive slope → moving in positive (east) direction</text>
+        <text x="250" y="358" text-anchor="middle" font-size="9" fill="#92400e" font-weight="bold">Note: Average velocity can be found from ANY two points on a straight line segment</text>
+    </svg>`,
+    
+    reference_frame: `<svg class="svg-graph" width="500" height="340" viewBox="0 0 500 340" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="330" rx="12" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#065f46" font-weight="bold">📍 إطار المرجع - Reference Frame</text>
+        <!-- Number line -->
+        <line x1="50" y1="180" x2="450" y2="180" stroke="#374151" stroke-width="3" marker-end="url(#arrowRF)"/>
+        <!-- Origin -->
+        <circle cx="200" cy="180" r="6" fill="#dc2626"/>
+        <text x="200" y="210" text-anchor="middle" font-size="11" fill="#dc2626" font-weight="bold">Origin (0)</text>
+        <text x="200" y="225" text-anchor="middle" font-size="10" fill="#dc2626">نقطة الأصل</text>
+        <!-- Positive direction -->
+        <text x="350" y="165" text-anchor="middle" font-size="11" fill="#16a34a" font-weight="bold">+ East (موجب)</text>
+        <text x="350" y="180" text-anchor="middle" font-size="10" fill="#16a34a">+10, +20, +30...</text>
+        <!-- Negative direction -->
+        <text x="100" y="165" text-anchor="middle" font-size="11" fill="#dc2626" font-weight="bold">- West (سالب)</text>
+        <text x="100" y="180" text-anchor="middle" font-size="10" fill="#dc2626">-10, -20, -30...</text>
+        <!-- Scale marks -->
+        <line x1="250" y1="175" x2="250" y2="185" stroke="#374151" stroke-width="2"/>
+        <text x="250" y="200" text-anchor="middle" font-size="9" fill="#374151">+10</text>
+        <line x1="300" y1="175" x2="300" y2="185" stroke="#374151" stroke-width="2"/>
+        <text x="300" y="200" text-anchor="middle" font-size="9" fill="#374151">+20</text>
+        <line x1="350" y1="175" x2="350" y2="185" stroke="#374151" stroke-width="2"/>
+        <text x="350" y="200" text-anchor="middle" font-size="9" fill="#374151">+30</text>
+        <line x1="400" y1="175" x2="400" y2="185" stroke="#374151" stroke-width="2"/>
+        <text x="400" y="200" text-anchor="middle" font-size="9" fill="#374151">+40</text>
+        <line x1="150" y1="175" x2="150" y2="185" stroke="#374151" stroke-width="2"/>
+        <text x="150" y="200" text-anchor="middle" font-size="9" fill="#374151">-10</text>
+        <line x1="100" y1="175" x2="100" y2="185" stroke="#374151" stroke-width="2"/>
+        <text x="100" y="200" text-anchor="middle" font-size="9" fill="#374151">-20</text>
+        <!-- Object position -->
+        <circle cx="300" cy="140" r="15" fill="#3b82f6" stroke="#1e40af" stroke-width="2"/>
+        <text x="300" y="145" text-anchor="middle" font-size="12" fill="white" font-weight="bold">🚗</text>
+        <line x1="300" y1="155" x2="300" y2="180" stroke="#3b82f6" stroke-width="2" stroke-dasharray="3"/>
+        <text x="300" y="130" text-anchor="middle" font-size="10" fill="#1e40af" font-weight="bold">Position = +20</text>
+        <!-- Key concepts -->
+        <rect x="20" y="240" width="460" height="85" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="260" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">🔑 Key Concepts (مفاهيم أساسية):</text>
+        <text x="250" y="278" text-anchor="middle" font-size="10" fill="#92400e">• Position is measured from origin (الموقع يُقاس من نقطة الأصل)</text>
+        <text x="250" y="295" text-anchor="middle" font-size="10" fill="#92400e">• Displacement = change in position (الإزاحة = التغير في الموقع)</text>
+        <text x="250" y="312" text-anchor="middle" font-size="10" fill="#92400e">• Distance = total path length (المسافة = طول المسار الكلي)</text>
+        <text x="250" y="325" text-anchor="middle" font-size="9" fill="#92400e">• Distance ≥ |Displacement| always</text>
+        <defs><marker id="arrowRF" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#374151"/></marker></defs>
+    </svg>`
+};
+
+// ==================== EXAM DATA - 30 QUESTIONS ====================
+const originalExamData = {
+    sections: [
+        {
+            id: 'sec1',
+            title: { ar: '🔹 القسم 1: مفهوم السرعة المتوسطة (Q1-Q5)', en: '🔹 Section 1: Average Velocity Concept (Q1-Q5)' },
+            questions: [
+                {
+                    q: { ar: '<strong>السؤال 1:</strong> ما تعريف السرعة المتوسطة؟', en: '<strong>Question 1:</strong> What is the definition of average velocity?' },
+                    svg: svgGraphs.velocity_formula,
+                    options: [
+                        { ar: 'الإزاحة مقسومة على الزمن: v = Δx/Δt', en: 'Displacement divided by time: v = Δx/Δt' },
+                        { ar: 'المسافة مقسومة على الزمن', en: 'Distance divided by time' },
+                        { ar: 'الموقع النهائي فقط', en: 'Final position only' },
+                        { ar: 'التسارع × الزمن', en: 'Acceleration × time' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'السرعة المتوسطة = الإزاحة/الزمن = (x_f - x_i)/(t_f - t_i). هي كمية متجهة', en: 'Average velocity = displacement/time = (x_f - x_i)/(t_f - t_i). It is a vector quantity' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 2:</strong> ما الفرق بين السرعة المتوسطة والسرعة القياسية المتوسطة؟', en: '<strong>Question 2:</strong> What is the difference between average velocity and average speed?' },
+                    options: [
+                        { ar: 'السرعة المتجهة تستخدم الإزاحة، والقياسية تستخدم المسافة', en: 'Velocity uses displacement, speed uses distance' },
+                        { ar: 'لا فرق بينهما', en: 'No difference' },
+                        { ar: 'السرعة المتجهة دائماً أكبر', en: 'Velocity is always greater' },
+                        { ar: 'السرعة القياسية لها اتجاه', en: 'Speed has direction' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'السرعة المتوسطة (velocity) = الإزاحة/الزمن (متجهة). السرعة القياسية (speed) = المسافة/الزمن (غير متجهة)', en: 'Velocity = displacement/time (vector). Speed = distance/time (scalar)' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 3:</strong> إذا تحرك جسم من x = 10 m إلى x = 30 m في 5 s، فما سرعته المتوسطة؟', en: '<strong>Question 3:</strong> If an object moves from x = 10 m to x = 30 m in 5 s, what is its average velocity?' },
+                    options: [
+                        { ar: '<span class="math-display">4 m/s</span>', en: '<span class="math-display">4 m/s</span>' },
+                        { ar: '<span class="math-display">6 m/s</span>', en: '<span class="math-display">6 m/s</span>' },
+                        { ar: '<span class="math-display">8 m/s</span>', en: '<span class="math-display">8 m/s</span>' },
+                        { ar: '<span class="math-display">2 m/s</span>', en: '<span class="math-display">2 m/s</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'v = Δx/Δt = (30-10)/5 = 20/5 = 4 m/s', en: 'v = Δx/Δt = (30-10)/5 = 20/5 = 4 m/s' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 4:</strong> ما وحدة السرعة المتوسطة في النظام الدولي؟', en: '<strong>Question 4:</strong> What is the SI unit of average velocity?' },
+                    options: [
+                        { ar: '<span class="math-display">m/s</span> (متر/ثانية)', en: '<span class="math-display">m/s</span> (meters/second)' },
+                        { ar: '<span class="math-display">km/h</span>', en: '<span class="math-display">km/h</span>' },
+                        { ar: '<span class="math-display">m/s²</span>', en: '<span class="math-display">m/s²</span>' },
+                        { ar: '<span class="math-display">m·s</span>', en: '<span class="math-display">m·s</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'الوحدة الدولية للسرعة هي m/s (متر في الثانية)', en: 'SI unit of velocity is m/s (meters per second)' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 5:</strong> إذا كانت السرعة المتوسطة سالبة، فماذا يعني ذلك؟', en: '<strong>Question 5:</strong> If average velocity is negative, what does it mean?' },
+                    options: [
+                        { ar: 'الجسم يتحرك في الاتجاه السالب (مثل الغرب)', en: 'Object moves in negative direction (e.g., west)' },
+                        { ar: 'الجسم يتباطأ', en: 'Object is slowing down' },
+                        { ar: 'الجسم ساكن', en: 'Object is at rest' },
+                        { ar: 'خطأ في الحساب', en: 'Calculation error' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'السرعة السالبة تعني أن الجسم يتحرك في الاتجاه السالب (حسب إطار المرجع المختار)', en: 'Negative velocity means object moves in negative direction (per chosen reference frame)' }
+                }
+            ]
+        },
+        {
+            id: 'sec2',
+            title: { ar: '🔹 القسم 2: مسائل الموقع (مثل Q41) (Q6-Q10)', en: '🔹 Section 2: Position Problems (like Q41) (Q6-Q10)' },
+            questions: [
+                {
+                    q: { ar: '<strong>السؤال 6 (مثل Q41):</strong> سيارتان تسيران على طريق مستقيم. تمران بالنقطة B ثم تستمران في اتجاهين متعاكسين. السيارة البرتقالية تسير 0.25 h من B إلى C بسرعة 32 km/h شرقاً. كم المسافة التي قطعتها من B؟', en: '<strong>Question 6 (like Q41):</strong> Two cars travel on a straight road, pass point B, then continue in opposite directions. Orange car travels 0.25 h from B to C at 32 km/h east. How far from B?' },
+                    svg: svgGraphs.two_cars_problem,
+                    options: [
+                        { ar: '<span class="math-display">8 km</span>', en: '<span class="math-display">8 km</span>' },
+                        { ar: '<span class="math-display">32 km</span>', en: '<span class="math-display">32 km</span>' },
+                        { ar: '<span class="math-display">128 km</span>', en: '<span class="math-display">128 km</span>' },
+                        { ar: '<span class="math-display">16 km</span>', en: '<span class="math-display">16 km</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'المسافة = السرعة × الزمن = 32 × 0.25 = 8 km. السيارة البرتقالية تبعد 8 km شرق B', en: 'Distance = velocity × time = 32 × 0.25 = 8 km east of B' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 7 (مثل Q41):</strong> في نفس المسألة، السيارة الزرقاء تسير 0.25 h من B إلى D بسرعة 48 km/h غرباً. كم المسافة من B؟', en: '<strong>Question 7 (like Q41):</strong> In same problem, blue car travels 0.25 h from B to D at 48 km/h west. How far from B?' },
+                    options: [
+                        { ar: '<span class="math-display">12 km</span>', en: '<span class="math-display">12 km</span>' },
+                        { ar: '<span class="math-display">48 km</span>', en: '<span class="math-display">48 km</span>' },
+                        { ar: '<span class="math-display">192 km</span>', en: '<span class="math-display">192 km</span>' },
+                        { ar: '<span class="math-display">24 km</span>', en: '<span class="math-display">24 km</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'المسافة = 48 × 0.25 = 12 km. السيارة الزرقاء تبعد 12 km غرب B', en: 'Distance = 48 × 0.25 = 12 km west of B' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 8 (مثل Q41):</strong> إذا كانت النقطة A (نقطة الأصل) تبعد 6.0 km غرب B، فما موقع السيارة البرتقالية بالنسبة لـ A؟', en: '<strong>Question 8 (like Q41):</strong> If point A (origin) is 6.0 km west of B, what is orange car position relative to A?' },
+                    options: [
+                        { ar: '<span class="math-display">+14 km</span> (14 km شرق A)', en: '<span class="math-display">+14 km</span> (14 km east of A)' },
+                        { ar: '<span class="math-display">+8 km</span>', en: '<span class="math-display">+8 km</span>' },
+                        { ar: '<span class="math-display">+2 km</span>', en: '<span class="math-display">+2 km</span>' },
+                        { ar: '<span class="math-display">-14 km</span>', en: '<span class="math-display">-14 km</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'موقع B بالنسبة لـ A = +6 km. السيارة البرتقالية 8 km شرق B. إذن موقعها = 6 + 8 = +14 km', en: 'Position of B relative to A = +6 km. Orange car is 8 km east of B. Position = 6 + 8 = +14 km' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 9 (مثل Q41):</strong> ما موقع السيارة الزرقاء بالنسبة لـ A (نقطة الأصل)؟', en: '<strong>Question 9 (like Q41):</strong> What is blue car position relative to A (origin)?' },
+                    options: [
+                        { ar: '<span class="math-display">-6 km</span> (6 km غرب A)', en: '<span class="math-display">-6 km</span> (6 km west of A)' },
+                        { ar: '<span class="math-display">+6 km</span>', en: '<span class="math-display">+6 km</span>' },
+                        { ar: '<span class="math-display">-12 km</span>', en: '<span class="math-display">-12 km</span>' },
+                        { ar: '<span class="math-display">+18 km</span>', en: '<span class="math-display">+18 km</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'موقع B = +6 km. السيارة الزرقاء 12 km غرب B. موقعها = 6 - 12 = -6 km (غرب A)', en: 'Position of B = +6 km. Blue car is 12 km west of B. Position = 6 - 12 = -6 km (west of A)' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 10:</strong> ما المسافة بين السيارتين بعد 0.25 h؟', en: '<strong>Question 10:</strong> What is the distance between the two cars after 0.25 h?' },
+                    options: [
+                        { ar: '<span class="math-display">20 km</span>', en: '<span class="math-display">20 km</span>' },
+                        { ar: '<span class="math-display">8 km</span>', en: '<span class="math-display">8 km</span>' },
+                        { ar: '<span class="math-display">12 km</span>', en: '<span class="math-display">12 km</span>' },
+                        { ar: '<span class="math-display">4 km</span>', en: '<span class="math-display">4 km</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'المسافة = 8 + 12 = 20 km (لأنهما تسيران في اتجاهين متعاكسين من B)', en: 'Distance = 8 + 12 = 20 km (they travel in opposite directions from B)' }
+                }
+            ]
+        },
+        {
+            id: 'sec3',
+            title: { ar: '🔹 القسم 3: مسائل السفن (مثل Q32-34) (Q11-Q15)', en: '🔹 Section 3: Ship Problems (like Q32-34) (Q11-Q15)' },
+            questions: [
+                {
+                    q: { ar: '<strong>السؤال 11 (مثل Q32):</strong> سفينة تبحر بسرعة ثابتة 42 km/h شرقاً. إذا أبحرت من B إلى C في 1.5 h، وما موقع B هو +25 km من A، فما موقع C بالنسبة لـ A؟', en: '<strong>Question 11 (like Q32):</strong> Ship sails at 42 km/h east. From B to C in 1.5 h. B is at +25 km from A. Position of C relative to A?' },
+                    svg: svgGraphs.ship_path,
+                    options: [
+                        { ar: '<span class="math-display">+88 km</span>', en: '<span class="math-display">+88 km</span>' },
+                        { ar: '<span class="math-display">+63 km</span>', en: '<span class="math-display">+63 km</span>' },
+                        { ar: '<span class="math-display">+25 km</span>', en: '<span class="math-display">+25 km</span>' },
+                        { ar: '<span class="math-display">+113 km</span>', en: '<span class="math-display">+113 km</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'Δx = v·t = 42 × 1.5 = 63 km. موقع C = 25 + 63 = +88 km', en: 'Δx = 42 × 1.5 = 63 km. Position of C = 25 + 63 = +88 km' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 12 (مثل Q33):</strong> سفينة أخرى تبدأ من B بسرعة 58 km/h شرقاً. ما موقعها بالنسبة لـ A بعد 1.5 h؟', en: '<strong>Question 12 (like Q33):</strong> Another ship starts from B at 58 km/h east. Position relative to A after 1.5 h?' },
+                    options: [
+                        { ar: '<span class="math-display">+112 km</span>', en: '<span class="math-display">+112 km</span>' },
+                        { ar: '<span class="math-display">+87 km</span>', en: '<span class="math-display">+87 km</span>' },
+                        { ar: '<span class="math-display">+58 km</span>', en: '<span class="math-display">+58 km</span>' },
+                        { ar: '<span class="math-display">+113 km</span>', en: '<span class="math-display">+113 km</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'Δx = 58 × 1.5 = 87 km. موقع = 25 + 87 = +112 km', en: 'Δx = 58 × 1.5 = 87 km. Position = 25 + 87 = +112 km' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 13 (مثل Q34):</strong> سفينة تبدأ من B وتسير بسرعة 35 km/h غرباً إلى D في 1.2 h. ما موقع D بالنسبة لـ A؟', en: '<strong>Question 13 (like Q34):</strong> Ship starts from B, travels 35 km/h west to D in 1.2 h. Position of D relative to A?' },
+                    options: [
+                        { ar: '<span class="math-display">-17 km</span>', en: '<span class="math-display">-17 km</span>' },
+                        { ar: '<span class="math-display">+17 km</span>', en: '<span class="math-display">+17 km</span>' },
+                        { ar: '<span class="math-display">-42 km</span>', en: '<span class="math-display">-42 km</span>' },
+                        { ar: '<span class="math-display">+67 km</span>', en: '<span class="math-display">+67 km</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'Δx = -35 × 1.2 = -42 km (غرب). موقع D = 25 + (-42) = -17 km', en: 'Δx = -35 × 1.2 = -42 km (west). Position of D = 25 - 42 = -17 km' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 14:</strong> ما الإزاحة الكلية للسفينة في السؤال 13؟', en: '<strong>Question 14:</strong> What is the total displacement of the ship in Q13?' },
+                    options: [
+                        { ar: '<span class="math-display">-42 km</span> (42 km غرب)', en: '<span class="math-display">-42 km</span> (42 km west)' },
+                        { ar: '<span class="math-display">+42 km</span>', en: '<span class="math-display">+42 km</span>' },
+                        { ar: '<span class="math-display">-17 km</span>', en: '<span class="math-display">-17 km</span>' },
+                        { ar: '<span class="math-display">+17 km</span>', en: '<span class="math-display">+17 km</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'الإزاحة = الموقع النهائي - الموقع الابتدائي = -17 - 25 = -42 km', en: 'Displacement = final - initial = -17 - 25 = -42 km' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 15:</strong> سفينة تبحر 50 km شرقاً ثم 30 km غرباً. ما الإزاحة الكلية؟', en: '<strong>Question 15:</strong> Ship sails 50 km east then 30 km west. Total displacement?' },
+                    options: [
+                        { ar: '<span class="math-display">+20 km</span> (20 km شرق)', en: '<span class="math-display">+20 km</span> (20 km east)' },
+                        { ar: '<span class="math-display">+80 km</span>', en: '<span class="math-display">+80 km</span>' },
+                        { ar: '<span class="math-display">-20 km</span>', en: '<span class="math-display">-20 km</span>' },
+                        { ar: '<span class="math-display">0 km</span>', en: '<span class="math-display">0 km</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'الإزاحة = +50 + (-30) = +20 km. المسافة الكلية = 50 + 30 = 80 km', en: 'Displacement = +50 + (-30) = +20 km. Total distance = 80 km' }
+                }
+            ]
+        },
+        {
+            id: 'sec4',
+            title: { ar: '🔹 القسم 4: مسائل الدراجة والكلب (Q16-Q20)', en: '🔹 Section 4: Motorcycle & Dog Problems (Q16-Q20)' },
+            questions: [
+                {
+                    q: { ar: '<strong>السؤال 16 (مثل Example 4):</strong> دراج ناري عند النقطة B (x_i = 46 m) يسير بسرعة 12 m/s شرقاً ويصل إلى C بعد 3.0 s. ما موقع C؟', en: '<strong>Question 16 (like Example 4):</strong> Motorcyclist at B (x_i = 46 m) travels at 12 m/s east, arrives at C after 3.0 s. Position of C?' },
+                    svg: svgGraphs.motorcycle_problem,
+                    options: [
+                        { ar: '<span class="math-display">82 m</span> شرق', en: '<span class="math-display">82 m</span> east' },
+                        { ar: '<span class="math-display">36 m</span> شرق', en: '<span class="math-display">36 m</span> east' },
+                        { ar: '<span class="math-display">46 m</span> شرق', en: '<span class="math-display">46 m</span> east' },
+                        { ar: '<span class="math-display">128 m</span> شرق', en: '<span class="math-display">128 m</span> east' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'x_f = x_i + v·t = 46 + 12×3 = 46 + 36 = 82 m east', en: 'x_f = 46 + 12×3 = 46 + 36 = 82 m east' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 17:</strong> ما إزاحة الدراج الناري في السؤال 16؟', en: '<strong>Question 17:</strong> What is the displacement of the motorcyclist in Q16?' },
+                    options: [
+                        { ar: '<span class="math-display">+36 m</span>', en: '<span class="math-display">+36 m</span>' },
+                        { ar: '<span class="math-display">+82 m</span>', en: '<span class="math-display">+82 m</span>' },
+                        { ar: '<span class="math-display">+46 m</span>', en: '<span class="math-display">+46 m</span>' },
+                        { ar: '<span class="math-display">+12 m</span>', en: '<span class="math-display">+12 m</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'Δx = x_f - x_i = 82 - 46 = +36 m', en: 'Δx = 82 - 46 = +36 m' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 18 (مثل مسألة الكلب):</strong> كلب يجري بسرعة 4.00 m/s لمدة 2.00 min. ما المسافة المقطوعة؟ (الموقع الابتدائي = 0)', en: '<strong>Question 18 (like dog problem):</strong> Dog runs at 4.00 m/s for 2.00 min. Distance traveled? (initial position = 0)' },
+                    svg: svgGraphs.dog_running,
+                    options: [
+                        { ar: '<span class="math-display">480 m</span>', en: '<span class="math-display">480 m</span>' },
+                        { ar: '<span class="math-display">8 m</span>', en: '<span class="math-display">8 m</span>' },
+                        { ar: '<span class="math-display">240 m</span>', en: '<span class="math-display">240 m</span>' },
+                        { ar: '<span class="math-display">48 m</span>', en: '<span class="math-display">48 m</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 't = 2 min = 120 s. x = v·t = 4 × 120 = 480 m', en: 't = 2 min = 120 s. x = 4 × 120 = 480 m' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 19:</strong> في السؤال 18، ما الموقع النهائي للكلب؟', en: '<strong>Question 19:</strong> In Q18, what is the final position of the dog?' },
+                    options: [
+                        { ar: '<span class="math-display">+480 m</span>', en: '<span class="math-display">+480 m</span>' },
+                        { ar: '<span class="math-display">+8 m</span>', en: '<span class="math-display">+8 m</span>' },
+                        { ar: '<span class="math-display">+120 m</span>', en: '<span class="math-display">+120 m</span>' },
+                        { ar: '<span class="math-display">+4 m</span>', en: '<span class="math-display">+4 m</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'x_f = x_i + v·t = 0 + 480 = +480 m', en: 'x_f = 0 + 480 = +480 m' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 20:</strong> دراجة نارية تسير 25 m/s غرباً لمدة 4.0 s. إذا كان موقعها الابتدائي +100 m، فما موقعها النهائي؟', en: '<strong>Question 20:</strong> Motorcycle travels 25 m/s west for 4.0 s. Initial position +100 m. Final position?' },
+                    options: [
+                        { ar: '<span class="math-display">0 m</span>', en: '<span class="math-display">0 m</span>' },
+                        { ar: '<span class="math-display">+200 m</span>', en: '<span class="math-display">+200 m</span>' },
+                        { ar: '<span class="math-display">-100 m</span>', en: '<span class="math-display">-100 m</span>' },
+                        { ar: '<span class="math-display">+100 m</span>', en: '<span class="math-display">+100 m</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'x_f = 100 + (-25)(4) = 100 - 100 = 0 m', en: 'x_f = 100 + (-25)(4) = 100 - 100 = 0 m' }
+                }
+            ]
+        },
+        {
+            id: 'sec5',
+            title: { ar: '🔹 القسم 5: رسوم الموقع-الزمن (Q21-Q25)', en: '🔹 Section 5: Position-Time Graphs (Q21-Q25)' },
+            questions: [
+                {
+                    q: { ar: '<strong>السؤال 21:</strong> في الرسم البياني، ما السرعة المتوسطة بين 40 و 55 ثانية؟', en: '<strong>Question 21:</strong> In the graph, what is average velocity between 40 and 55 seconds?' },
+                    svg: svgGraphs.position_time_graph,
+                    options: [
+                        { ar: '<span class="math-display">+2.67 m/s</span>', en: '<span class="math-display">+2.67 m/s</span>' },
+                        { ar: '<span class="math-display">-2.67 m/s</span>', en: '<span class="math-display">-2.67 m/s</span>' },
+                        { ar: '<span class="math-display">+4 m/s</span>', en: '<span class="math-display">+4 m/s</span>' },
+                        { ar: '<span class="math-display">0 m/s</span>', en: '<span class="math-display">0 m/s</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'عند t=40s: x=-40 m. عند t=55s: x=0 m. v = (0-(-40))/(55-40) = 40/15 ≈ 2.67 m/s', en: 'At t=40s: x=-40 m. At t=55s: x=0 m. v = 40/15 ≈ 2.67 m/s' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 22:</strong> في الرسم البياني، ما السرعة المتوسطة بين 10 و 55 ثانية؟', en: '<strong>Question 22:</strong> In the graph, what is average velocity between 10 and 55 seconds?' },
+                    options: [
+                        { ar: '<span class="math-display">-1.33 m/s</span>', en: '<span class="math-display">-1.33 m/s</span>' },
+                        { ar: '<span class="math-display">+1.33 m/s</span>', en: '<span class="math-display">+1.33 m/s</span>' },
+                        { ar: '<span class="math-display">-2 m/s</span>', en: '<span class="math-display">-2 m/s</span>' },
+                        { ar: '<span class="math-display">0 m/s</span>', en: '<span class="math-display">0 m/s</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'عند t=10s: x=60 m. عند t=55s: x=0 m. v = (0-60)/(55-10) = -60/45 ≈ -1.33 m/s', en: 'At t=10s: x=60 m. At t=55s: x=0 m. v = -60/45 ≈ -1.33 m/s' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 23:</strong> في الرسم البياني، ما السرعة بين 0 و 10 ثوانٍ؟', en: '<strong>Question 23:</strong> In the graph, what is velocity between 0 and 10 seconds?' },
+                    options: [
+                        { ar: '<span class="math-display">+6 m/s</span>', en: '<span class="math-display">+6 m/s</span>' },
+                        { ar: '<span class="math-display">-6 m/s</span>', en: '<span class="math-display">-6 m/s</span>' },
+                        { ar: '<span class="math-display">+60 m/s</span>', en: '<span class="math-display">+60 m/s</span>' },
+                        { ar: '<span class="math-display">0 m/s</span>', en: '<span class="math-display">0 m/s</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'عند t=0: x=0. عند t=10s: x=60 m. v = (60-0)/(10-0) = 6 m/s', en: 'At t=0: x=0. At t=10s: x=60 m. v = 60/10 = 6 m/s' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 24:</strong> في الرسم البياني، متى يكون الجسم ساكناً (velocity = 0)؟', en: '<strong>Question 24:</strong> In the graph, when is the object at rest (velocity = 0)?' },
+                    options: [
+                        { ar: 'بين 10 و 15 ثانية', en: 'Between 10 and 15 seconds' },
+                        { ar: 'بين 0 و 10 ثوانٍ', en: 'Between 0 and 10 seconds' },
+                        { ar: 'بين 15 و 40 ثانية', en: 'Between 15 and 40 seconds' },
+                        { ar: 'بين 40 و 55 ثانية', en: 'Between 40 and 55 seconds' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'بين 10 و 15 ثانية، الخط أفقي (الموقع ثابت = 60 m)، إذن السرعة = 0', en: 'Between 10-15s, line is horizontal (position constant = 60 m), so velocity = 0' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 25:</strong> ما الذي يمثله ميل رسم الموقع-الزمن؟', en: '<strong>Question 25:</strong> What does the slope of a position-time graph represent?' },
+                    svg: svgGraphs.slope_interpretation,
+                    options: [
+                        { ar: 'السرعة (velocity)', en: 'Velocity' },
+                        { ar: 'التسارع (acceleration)', en: 'Acceleration' },
+                        { ar: 'المسافة (distance)', en: 'Distance' },
+                        { ar: 'الزمن (time)', en: 'Time' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'ميل رسم الموقع-الزمن = Δx/Δt = السرعة المتوسطة', en: 'Slope of position-time graph = Δx/Δt = average velocity' }
+                }
+            ]
+        },
+        {
+            id: 'sec6',
+            title: { ar: '🔹 القسم 6: مسائل مركبة وتحويلات (Q26-Q30)', en: '🔹 Section 6: Mixed Problems & Conversions (Q26-Q30)' },
+            questions: [
+                {
+                    q: { ar: '<strong>السؤال 26:</strong> سيارة تسير 72 km/h. ما سرعتها بـ m/s؟', en: '<strong>Question 26:</strong> A car travels at 72 km/h. What is its speed in m/s?' },
+                    svg: svgGraphs.reference_frame,
+                    options: [
+                        { ar: '<span class="math-display">20 m/s</span>', en: '<span class="math-display">20 m/s</span>' },
+                        { ar: '<span class="math-display">72 m/s</span>', en: '<span class="math-display">72 m/s</span>' },
+                        { ar: '<span class="math-display">200 m/s</span>', en: '<span class="math-display">200 m/s</span>' },
+                        { ar: '<span class="math-display">7.2 m/s</span>', en: '<span class="math-display">7.2 m/s</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '72 km/h × (1000 m/1 km) × (1 h/3600 s) = 72/3.6 = 20 m/s', en: '72 km/h × (1000/3600) = 72/3.6 = 20 m/s' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 27:</strong> عداء يقطع 100 m في 10 s. ما سرعته المتوسطة؟', en: '<strong>Question 27:</strong> A runner covers 100 m in 10 s. What is average speed?' },
+                    options: [
+                        { ar: '<span class="math-display">10 m/s</span>', en: '<span class="math-display">10 m/s</span>' },
+                        { ar: '<span class="math-display">100 m/s</span>', en: '<span class="math-display">100 m/s</span>' },
+                        { ar: '<span class="math-display">1 m/s</span>', en: '<span class="math-display">1 m/s</span>' },
+                        { ar: '<span class="math-display">1000 m/s</span>', en: '<span class="math-display">1000 m/s</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'v = Δx/Δt = 100/10 = 10 m/s', en: 'v = 100/10 = 10 m/s' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 28:</strong> قطار يسير 90 km/h. كم مسافة يقطعها في 20 دقيقة؟', en: '<strong>Question 28:</strong> Train travels at 90 km/h. How far in 20 minutes?' },
+                    options: [
+                        { ar: '<span class="math-display">30 km</span>', en: '<span class="math-display">30 km</span>' },
+                        { ar: '<span class="math-display">90 km</span>', en: '<span class="math-display">90 km</span>' },
+                        { ar: '<span class="math-display">180 km</span>', en: '<span class="math-display">180 km</span>' },
+                        { ar: '<span class="math-display">4.5 km</span>', en: '<span class="math-display">4.5 km</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 't = 20 min = 1/3 h. d = v·t = 90 × (1/3) = 30 km', en: 't = 20 min = 1/3 h. d = 90 × 1/3 = 30 km' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 29:</strong> جسم يتحرك من x = -5 m إلى x = +10 m. ما الإزاحة؟', en: '<strong>Question 29:</strong> Object moves from x = -5 m to x = +10 m. What is displacement?' },
+                    options: [
+                        { ar: '<span class="math-display">+15 m</span>', en: '<span class="math-display">+15 m</span>' },
+                        { ar: '<span class="math-display">+5 m</span>', en: '<span class="math-display">+5 m</span>' },
+                        { ar: '<span class="math-display">-15 m</span>', en: '<span class="math-display">-15 m</span>' },
+                        { ar: '<span class="math-display">+10 m</span>', en: '<span class="math-display">+10 m</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'Δx = x_f - x_i = 10 - (-5) = 10 + 5 = +15 m', en: 'Δx = 10 - (-5) = 10 + 5 = +15 m' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 30:</strong> أي عبارة صحيحة عن الإزاحة والمسافة؟', en: '<strong>Question 30:</strong> Which statement about displacement and distance is true?' },
+                    options: [
+                        { ar: 'المسافة ≥ |الإزاحة| دائماً', en: 'Distance ≥ |Displacement| always' },
+                        { ar: 'الإزاحة دائماً أكبر من المسافة', en: 'Displacement always greater than distance' },
+                        { ar: 'المسافة والإزاحة دائماً متساويتان', en: 'Distance and displacement always equal' },
+                        { ar: 'الإزاحة كمية قياسية', en: 'Displacement is a scalar' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'المسافة (scalar) ≥ |الإزاحة (vector)| دائماً. تتساوى فقط عند الحركة في خط مستقيم بدون تغيير اتجاه', en: 'Distance (scalar) ≥ |Displacement (vector)| always. Equal only for straight-line motion without direction change' }
+                }
+            ]
+        }
+    ]
+};
+
+function shuffleArray(array) {
+    const arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(rng() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
+function prepareShuffledExam() {
+    rng = mulberry32(currentSeed);
+    examData = JSON.parse(JSON.stringify(originalExamData));
+    correctAnswersMap = {};
+    let globalIdx = 0;
+    examData.sections.forEach((section) => {
+        section.questions = shuffleArray(section.questions);
+        section.questions.forEach((q) => {
+            const optionsWithCorrect = q.options.map((opt, idx) => ({ option: opt, isCorrect: idx === q.correct }));
+            const shuffledOptions = shuffleArray(optionsWithCorrect);
+            q.options = shuffledOptions.map(o => o.option);
+            q.correct = shuffledOptions.findIndex(o => o.isCorrect);
+            correctAnswersMap[globalIdx] = String.fromCharCode(97 + q.correct);
+            globalIdx++;
+        });
+    });
+}
+
+function reshuffleExam() {
+    const msg = currentLang === 'ar' ? '🔄 سيتم إنشاء أسئلة جديدة ومسح إجاباتك. هل أنت متأكد؟' : '🔄 New questions will be generated. Are you sure?';
+    if (confirm(msg)) {
+        currentSeed = Date.now(); timeRemaining = TOTAL_TIME; answersVisible = false;
+        prepareShuffledExam(); renderExam(); saveState();
+        alert(currentLang === 'ar' ? '🎲 تم تغيير الأسئلة! حظاً موفقاً! 🍀' : '🎲 Questions changed! Good luck! 🍀');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+}
+
+function setLanguage(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.getElementById('btn-ar').classList.toggle('active', lang === 'ar');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.body.classList.toggle('en-mode', lang === 'en');
+    
+    document.querySelectorAll('[data-ar]').forEach(el => {
+        el.textContent = el.getAttribute('data-' + lang);
+    });
+    
+    document.querySelectorAll('[data-placeholder-ar]').forEach(el => {
+        el.placeholder = el.getAttribute('data-placeholder-' + lang);
+    });
+    
+    renderExam(); saveState(false);
+}
+
+function renderExam() {
+    const container = document.getElementById('exam-content');
+    const labels = { ar: { option: ['a)', 'b)', 'c)', 'd)'], answer: '✅ الإجابة:' }, en: { option: ['a)', 'b)', 'c)', 'd)'], answer: '✅ Answer:' } };
+    const lbl = labels[currentLang];
+    let html = '';
+    let globalIdx = 0;
+    
+    examData.sections.forEach((section, secIdx) => {
+        const badgeClass = ['module-1', 'module-2', 'module-3', 'module-4', 'module-5', 'module-6'][secIdx];
+        html += '<section class="bg-white p-6 rounded-2xl shadow-lg border-2 border-blue-100">';
+        html += '<div class="text-center mb-4"><span class="module-badge ' + badgeClass + '">' + section.title[currentLang] + '</span></div>';
+        html += '<ol class="space-y-4 text-sm">';
+        
+        section.questions.forEach((q) => {
+            html += '<li class="border-r-4 border-blue-400 pr-4 py-2" id="q-' + globalIdx + '" style="border-right: 4px solid #2563eb; padding-right: 1rem;">';
+            html += '<strong class="text-blue-700">' + (globalIdx + 1) + '.</strong> ' + q.q[currentLang] + '<br>';
+            if (q.svg) html += '<div class="graph-container">' + q.svg + '</div>';
+            
+            q.options.forEach((opt, oIdx) => {
+                html += '<label class="cursor-pointer block mt-2 mr-4 hover:bg-blue-50 rounded-lg p-2 transition" style="margin-right: 1rem;">';
+                html += '<input type="radio" name="q' + globalIdx + '" value="' + String.fromCharCode(97 + oIdx) + '" class="mr-2 ml-2">';
+                html += '<span class="arabic-math">' + lbl.option[oIdx] + ' ' + opt[currentLang] + '</span>';
+                html += '</label>';
+            });
+            
+            html += '<div class="answer-box text-green-700 mt-3 font-medium ' + (answersVisible ? '' : 'hidden') + ' bg-green-50 rounded-lg p-3 border border-green-200">';
+            html += lbl.answer + ' ' + lbl.option[q.correct] + ' <span class="arabic-math">' + q.options[q.correct][currentLang] + '</span><br>';
+            html += '<span class="text-sm text-green-700 mt-2 block arabic-math">' + q.answer[currentLang] + '</span>';
+            html += '</div></li>';
+            globalIdx++;
+        });
+        
+        html += '</ol></section>';
+    });
+    
+    container.innerHTML = html;
+}
+
+function startTimer() {
+    updateTimerDisplay();
+    timerInterval = setInterval(() => {
+        timeRemaining--;
+        updateTimerDisplay();
+        if (timeRemaining % 60 === 0) saveState(false);
+        if (timeRemaining <= 600) document.getElementById('timer').classList.add('timer-warning');
+        if (timeRemaining <= 0) {
+            clearInterval(timerInterval);
+            alert(currentLang === 'ar' ? "⏰ انتهى الوقت!" : "⏰ Time's up!");
+            gradeExam();
+        }
+    }, 1000);
+}
+
+function updateTimerDisplay() {
+    const m = Math.floor(timeRemaining / 60);
+    const s = timeRemaining % 60;
+    document.getElementById('timer').textContent = m.toString().padStart(2,'0') + ':' + s.toString().padStart(2,'0');
+}
+
+function toggleAnswers() {
+    answersVisible = !answersVisible;
+    document.querySelectorAll('.answer-box').forEach(el => el.classList.toggle('hidden', !answersVisible));
+    saveState(false);
+}
+
+function gradeExam() {
+    let correctCount = 0;
+    const sectionScores = new Array(TOTAL_SECTIONS).fill(0);
+    
+    for (let i = 0; i < TOTAL_QUESTIONS; i++) {
+        const sel = document.querySelector('input[name="q'+i+'"]:checked');
+        const li = document.getElementById('q-' + i);
+        if (li) {
+            const isCorrect = sel && sel.value === correctAnswersMap[i];
+            if (isCorrect) {
+                correctCount++;
+                li.classList.add('correct');
+                li.classList.remove('incorrect');
+                sectionScores[Math.floor(i / QUESTIONS_PER_SECTION)]++;
+            } else {
+                li.classList.add('incorrect');
+                li.classList.remove('correct');
+            }
+        }
+    }
+    
+    const score = Math.round((correctCount / TOTAL_QUESTIONS) * 100);
+    document.getElementById('res-total').textContent = score + ' / 100';
+    document.getElementById('res-name').textContent = document.getElementById('studentName').value || (currentLang === 'ar' ? 'بطل' : 'Champion');
+    document.getElementById('res-date').textContent = new Date().toLocaleDateString(currentLang === 'ar' ? 'ar-AE' : 'en-US');
+    
+    const pc = document.getElementById('sections-performance');
+    pc.innerHTML = '';
+    examData.sections.forEach((s, idx) => {
+        pc.innerHTML += '<div class="flex justify-between items-center p-3 bg-white rounded-lg"><span class="text-gray-700">' + s.title[currentLang] + '</span><span class="font-bold text-blue-700">' + sectionScores[idx] + '/' + QUESTIONS_PER_SECTION + '</span></div>';
+    });
+    
+    const badge = document.getElementById('success-badge');
+    document.getElementById('success-percent').textContent = score + '%';
+    
+    if (currentLang === 'ar') {
+        if (score >= 90) { badge.textContent = '🌟 ممتاز جداً!'; badge.className = 'success-badge grade-excellent'; }
+        else if (score >= 75) { badge.textContent = '👏 ممتاز!'; badge.className = 'success-badge grade-good'; }
+        else if (score >= 50) { badge.textContent = '👍 جيد'; badge.className = 'success-badge grade-pass'; }
+        else { badge.textContent = '💪 حاول مرة أخرى'; badge.className = 'success-badge grade-fail'; }
+    } else {
+        if (score >= 90) { badge.textContent = '🌟 Outstanding!'; badge.className = 'success-badge grade-excellent'; }
+        else if (score >= 75) { badge.textContent = '👏 Excellent!'; badge.className = 'success-badge grade-good'; }
+        else if (score >= 50) { badge.textContent = '👍 Good'; badge.className = 'success-badge grade-pass'; }
+        else { badge.textContent = '💪 Try Again'; badge.className = 'success-badge grade-fail'; }
+    }
+    
+    document.getElementById('results-panel').classList.remove('hidden');
+    document.getElementById('results-panel').scrollIntoView({ behavior: 'smooth' });
+    if (timerInterval) clearInterval(timerInterval);
+}
+
+function sendResultsToEmail() {
+    const btn = document.getElementById('sendEmailBtn');
+    const status = document.getElementById('emailStatus');
+    btn.disabled = true;
+    btn.textContent = currentLang === 'ar' ? '⏳ جاري الإرسال...' : '⏳ Sending...';
+    
+    const name = document.getElementById('studentName').value || 'N/A';
+    const studentClass = document.getElementById('studentClass').value || 'N/A';
+    const date = document.getElementById('examDate').value || new Date().toLocaleDateString();
+    const score = document.getElementById('res-total').textContent;
+    const successRate = document.getElementById('success-percent').textContent;
+    const badge = document.getElementById('success-badge').textContent;
+    
+    let questionsHTML = '<div style="font-family:Arial; direction:rtl;">';
+    questionsHTML += '<h2>🚗 ' + (currentLang === 'ar' ? 'نتيجة امتحان السرعة المتوسطة' : 'Average Velocity Exam Result') + '</h2>';
+    questionsHTML += '<p><strong>' + (currentLang === 'ar' ? 'الاسم' : 'Name') + ':</strong> ' + name + '</p>';
+    questionsHTML += '<p><strong>' + (currentLang === 'ar' ? 'الشعبة' : 'Class') + ':</strong> ' + studentClass + '</p>';
+    questionsHTML += '<p><strong>' + (currentLang === 'ar' ? 'التاريخ' : 'Date') + ':</strong> ' + date + '</p>';
+    questionsHTML += '<p><strong>' + (currentLang === 'ar' ? 'الدرجة' : 'Score') + ':</strong> ' + score + ' (' + successRate + '%)</p>';
+    questionsHTML += '<p><strong>' + (currentLang === 'ar' ? 'التقدير' : 'Grade') + ':</strong> ' + badge + '</p>';
+    questionsHTML += '<hr><h3>' + (currentLang === 'ar' ? 'تفاصيل الإجابات:' : 'Answer Details:') + '</h3><table style="width:100%; border-collapse:collapse;">';
+    questionsHTML += '<tr style="background:#2563eb; color:white;"><th style="padding:8px; border:1px solid #ddd;">#</th><th style="padding:8px; border:1px solid #ddd;">' + (currentLang === 'ar' ? 'السؤال' : 'Question') + '</th><th style="padding:8px; border:1px solid #ddd;">' + (currentLang === 'ar' ? 'إجابة الطالب' : 'Student Answer') + '</th><th style="padding:8px; border:1px solid #ddd;">' + (currentLang === 'ar' ? 'الصحيحة' : 'Correct') + '</th><th style="padding:8px; border:1px solid #ddd;">' + (currentLang === 'ar' ? 'النتيجة' : 'Result') + '</th></tr>';
+    
+    let globalIdx = 0;
+    examData.sections.forEach((section) => {
+        questionsHTML += '<tr style="background:#dbeafe;"><td colspan="5" style="padding:8px; font-weight:bold; border:1px solid #ddd;">' + section.title.ar + '</td></tr>';
+        section.questions.forEach((q) => {
+            const sel = document.querySelector('input[name="q'+globalIdx+'"]:checked');
+            const sv = sel ? sel.value : null;
+            const cv = correctAnswersMap[globalIdx];
+            const ic = sv === cv;
+            let sat = currentLang === 'ar' ? '❌ لم يجب' : '❌ No answer';
+            let sac = '#dc2626';
+            if (sv) {
+                const si = sv.charCodeAt(0) - 97;
+                sat = q.options[si][currentLang];
+                sac = ic ? '#16a34a' : '#dc2626';
+            }
+            const cat = q.options[q.correct][currentLang];
+            const rb = ic ? '#f0fdf4' : '#fef2f2';
+            questionsHTML += '<tr style="background:' + rb + ';"><td style="padding:8px; border:1px solid #ddd; text-align:center;">' + (globalIdx+1) + '</td><td style="padding:8px; border:1px solid #ddd;">' + q.q.ar.replace(/<[^>]+>/g, '').substring(0, 80) + '...</td><td style="padding:8px; border:1px solid #ddd; color:' + sac + ';">' + sat + '</td><td style="padding:8px; border:1px solid #ddd; color:#16a34a;">' + cat + '</td><td style="padding:8px; border:1px solid #ddd; text-align:center;">' + (ic?'✅':'❌') + '</td></tr>';
+            globalIdx++;
+        });
+    });
+    questionsHTML += '</table></div>';
+    
+    const templateParams = {
+        to_email: TARGET_EMAIL,
+        student_name: name,
+        student_class: studentClass,
+        exam_date: date,
+        total_score: score,
+        success_rate: successRate,
+        grade: badge,
+        answers_table: questionsHTML
+    };
+    
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
+        .then(() => {
+            status.textContent = currentLang === 'ar' ? '✅ تم الإرسال بنجاح!' : '✅ Sent successfully!';
+            status.style.color = '#16a34a';
+            btn.textContent = currentLang === 'ar' ? '✓ تم' : '✓ Sent';
+            alert(currentLang === 'ar' ? 'تم إرسال النتيجة للمعلم بنجاح!' : 'Result sent to teacher successfully!');
+        })
+        .catch((error) => {
+            status.textContent = currentLang === 'ar' ? '❌ فشل الإرسال' : '❌ Failed to send';
+            status.style.color = '#dc2626';
+            btn.disabled = false;
+            btn.textContent = currentLang === 'ar' ? '📧 حاول مرة أخرى' : '📧 Try Again';
+            alert(currentLang === 'ar' ? 'فشل الإرسال: ' + error.text : 'Failed: ' + error.text);
+        });
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    const saved = loadState();
+    if (saved && saved.seed) {
+        currentSeed = saved.seed;
+        currentLang = saved.lang || 'ar';
+        timeRemaining = saved.timeRemaining !== undefined ? saved.timeRemaining : TOTAL_TIME;
+        answersVisible = saved.answersVisible || false;
+    } else {
+        currentSeed = Date.now();
+    }
+    
+    document.getElementById('btn-ar').classList.toggle('active', currentLang === 'ar');
+    document.getElementById('btn-en').classList.toggle('active', currentLang === 'en');
+    document.body.classList.toggle('en-mode', currentLang === 'en');
+    document.documentElement.lang = currentLang;
+    document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+    
+    document.querySelectorAll('[data-ar]').forEach(el => {
+        el.textContent = el.getAttribute('data-' + currentLang);
+    });
+    
+    document.querySelectorAll('[data-placeholder-ar]').forEach(el => {
+        el.placeholder = el.getAttribute('data-placeholder-' + currentLang);
+    });
+    
+    prepareShuffledExam();
+    renderExam();
+    if (saved) {
+        if (saved.studentName) document.getElementById('studentName').value = saved.studentName;
+        if (saved.studentClass) document.getElementById('studentClass').value = saved.studentClass;
+        if (saved.examDate) document.getElementById('examDate').value = saved.examDate;
+        if (saved.answers) restoreAnswers(saved.answers);
+    }
+    setupAnswerListeners();
+    setupInputListeners();
+    startTimer();
+});
+window.addEventListener('beforeunload', () => saveState(false));
+</script>
+</body>
+</html>
